@@ -1,0 +1,23 @@
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 75px;
+  padding: 10px;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  padding: 5px;
+}
+
+.radio-btn {
+  margin-left: 10px;
+}
+
+.label {
+  margin-left: 5px;
+}
