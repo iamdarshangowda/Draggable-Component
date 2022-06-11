@@ -1,85 +1,80 @@
-import { isVisible } from "@testing-library/user-event/dist/utils";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { usePosition } from "./Context/Position";
 import "../Styles/Dialog.css";
 
 function Dialog() {
-  const [direction, setDirection] = useState({
-    diffX: 0,
-    diffY: 0,
-    dragging: false,
-    styles: {
-      left: "",
-      top: "",
-    },
-  });
+  const [dragging, setDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 50 });
+  const [dragEnd, setDragEnd] = useState({ x: 0, y: 50 });
 
-  function handleDragStart(e) {
-    setDirection((prevDirection) => ({
-      ...prevDirection,
-      diffX: e.screenX - e.currentTarget.getBoundingClientRect().left,
-      diffY: e.screenY - e.currentTarget.getBoundingClientRect().top,
-      dragging: true,
-    }));
-    e.stopPropagation();
-    e.preventDefault();
-  }
-
-  let left;
-  let top;
-
-  function handleDragging(e) {
-    if (direction.dragging) {
-      left = e.screenX - direction.diffX;
-      top = e.screenY - direction.diffY;
-
-      setDirection((prevDirection) => ({
-        ...prevDirection,
-        styles: {
-          left: left,
-          top: top,
-        },
-      }));
-    }
-    e.stopPropagation();
-    e.preventDefault();
-  }
-
-  function handleDragEnd(e) {
-    setDirection((prevDirection) => ({
-      ...prevDirection,
-      dragging: false,
-    }));
-    e.stopPropagation();
-    e.preventDefault();
-  }
+  const {
+    positionDispatch,
+    positionState: { styles, nameOfPosition },
+  } = usePosition();
+  const dragDivRef = useRef(null);
 
   useEffect(() => {
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        setDirection((prev) => ({
-          ...prev,
-          display: "block",
-        }));
+    const onKeyPress = (e) => {
+      switch (e.key) {
+        case "Escape":
+          dragDivRef.current.style.display = "none";
+          break;
+        case "Enter":
+          dragDivRef.current.style.display = "flex";
+          break;
+        default:
+          break;
       }
-      if (e.key === "Escape") {
-        setDirection((prev) => ({
-          ...prev,
-          display: "none",
-        }));
-      }
-    });
-  }, [direction]);
+    };
+    document.addEventListener("keydown", onKeyPress);
+    return () => {
+      document.removeEventListener("keydown", onKeyPress);
+    };
+  }, []);
+
+  function handleDragStart(e) {
+    setDragging(true);
+    setDragStart({ x: e.clientX, y: e.clientY });
+  }
+
+  function handleDragging(e) {
+    if (!dragging) return;
+    let dragDivDetails = e.target.getBoundingClientRect();
+    const divPosition = {
+      x: dragDivDetails.left + e.clientX - dragStart.x,
+      y: dragDivDetails.top + e.clientY - dragStart.y,
+    };
+    if (
+      divPosition.y > 399 ||
+      divPosition.y < 51 ||
+      divPosition.x + 200 > document.documentElement.clientWidth ||
+      divPosition.x < 0
+    ) {
+      setDragging(false);
+      return;
+    }
+    setDragEnd(divPosition);
+  }
+
+  function handleDragEnd() {
+    setDragging(false);
+    positionDispatch({ type: "DRAG_POSITIONS", payload: dragEnd });
+  }
 
   return (
     <div
       className="drag-box"
-      style={direction.styles}
-      onMouseDown={handleDragStart}
-      onMouseMove={handleDragging}
-      onMouseUp={handleDragEnd}
+      style={styles}
+      ref={dragDivRef}
+      draggable="true"
+      onDragStart={handleDragStart}
+      onDrag={handleDragging}
+      onDragEnd={handleDragEnd}
     >
-      <h2 className="float-text">Floating...</h2>
-      <h2 className="drag-text">Drag me Around...</h2>
+      <p className="float-text">
+        {nameOfPosition !== "" ? nameOfPosition : "Floating..."}
+      </p>
+      <p className="drag-text">Drag me around !</p>
     </div>
   );
 }

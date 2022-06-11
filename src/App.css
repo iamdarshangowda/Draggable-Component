@@ -7,3 +7,27 @@
 body {
   font-family: "Open Sans", sans-serif;
 }
+
+.page2 {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  padding: 20px;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.page2 > h1 {
+  align-self: flex-start;
+}
+
+.about {
+  align-self: center;
+  max-width: 600px;
+}
+
+.btnp2 {
+  align-self: flex-start;
+  padding: 10px;
+  font-size: 16px;
+}

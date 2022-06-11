@@ -1,27 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../Styles/Navbar.css";
 import Clock from "./Clock";
-import Dialog from "./Dialog";
+import { usePosition } from "./Context/Position";
 
 function Navbar() {
-  const [viewCenter, setViewCenter] = useState(false);
-  const [viewLowerRight, setviewLowerRight] = useState(false);
-
-  const bothChecked = viewCenter || viewLowerRight ? true : false;
-
-  function handleCenter() {
-    setViewCenter((prev) => !prev);
-    if (viewLowerRight) {
-      setviewLowerRight(false);
-    }
-  }
-
-  function handleLowerRight() {
-    setviewLowerRight((prev) => !prev);
-    if (viewCenter) {
-      setViewCenter(false);
-    }
-  }
+  const {
+    positionDispatch,
+    positionState: { nameOfPosition },
+  } = usePosition();
+  const handlePosition = (e) => {
+    positionDispatch({ type: e.target.value });
+  };
 
   return (
     <div>
@@ -30,22 +19,24 @@ function Navbar() {
           <h3 className="position">Position:</h3>
           <input
             type="radio"
-            name="center"
+            name="selector"
             id="center"
             className="radio-btn"
-            checked={viewCenter}
-            onClick={handleCenter}
+            value="CENTER"
+            checked={nameOfPosition === "Center"}
+            onChange={handlePosition}
           />
           <label htmlFor="center" className="label">
             Center
           </label>
           <input
             type="radio"
-            name="lower-right"
+            name="selector"
             id="lower-right"
             className="radio-btn"
-            checked={viewLowerRight}
-            onClick={handleLowerRight}
+            value="LOWER_RIGHT"
+            checked={nameOfPosition === "Lower Right"}
+            onChange={handlePosition}
           />
           <label htmlFor="lower-right" className="label">
             Lower Right
@@ -56,7 +47,6 @@ function Navbar() {
         </p>
         <Clock />
       </div>
-      <Dialog />
     </div>
   );
 }

@@ -1,10 +1,10 @@
 .drag-box {
   width: 300px;
   height: 300px;
-  border: 2px solid blue;
   border-radius: 8px;
   position: absolute;
   cursor: move;
+  background: greenyellow;
 }
 
 .text-box {
@@ -13,8 +13,8 @@
 
 .float-text {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 5px;
+  left: 5px;
   font-size: 18px;
 }
 

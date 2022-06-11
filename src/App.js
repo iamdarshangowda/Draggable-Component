@@ -1,11 +1,16 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./Components/Navbar";
+import MainPage from "./Pages/MainPage";
+import SecondPage from "./Pages/SecondPage";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/SecondPage" element={<SecondPage />} />
+      </Routes>
     </div>
   );
 }
