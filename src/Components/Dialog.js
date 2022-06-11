@@ -45,8 +45,8 @@ function Dialog() {
       y: dragDivDetails.top + e.clientY - dragStart.y,
     };
     if (
-      divPosition.y > 399 ||
-      divPosition.y < 51 ||
+      divPosition.y > 295 ||
+      divPosition.y < 55 ||
       divPosition.x + 200 > document.documentElement.clientWidth ||
       divPosition.x < 0
     ) {

@@ -4,8 +4,8 @@
   align-items: center;
   flex-wrap: wrap;
   height: 50px;
-  padding: 10px;
-  background-color: brown;
+  padding: 5px;
+  background-color: #ff9671;
 }
 
 .radio {
