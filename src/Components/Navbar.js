@@ -5,11 +5,11 @@ import { usePosition } from "./Context/Position";
 
 function Navbar() {
   const {
-    positionDispatch,
+    positionPost,
     positionState: { nameOfPosition },
   } = usePosition();
   const handlePosition = (e) => {
-    positionDispatch({ type: e.target.value });
+    positionPost({ type: e.target.value });
   };
 
   return (

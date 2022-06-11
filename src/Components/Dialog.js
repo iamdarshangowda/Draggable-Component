@@ -8,7 +8,7 @@ function Dialog() {
   const [dragEnd, setDragEnd] = useState({ x: 0, y: 50 });
 
   const {
-    positionDispatch,
+    positionPost,
     positionState: { styles, nameOfPosition },
   } = usePosition();
   const dragDivRef = useRef(null);
@@ -58,7 +58,7 @@ function Dialog() {
 
   function handleDragEnd() {
     setDragging(false);
-    positionDispatch({ type: "DRAG_POSITIONS", payload: dragEnd });
+    positionPost({ type: "DRAG_POSITIONS", payload: dragEnd });
   }
 
   return (

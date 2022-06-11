@@ -5,11 +5,11 @@ import "../App.css";
 
 export default function SecondPage() {
   const navigate = useNavigate();
-  const { positionDispatch } = usePosition();
+  const { positionPost } = usePosition();
 
   function handleReturn() {
     navigate("/");
-    positionDispatch({
+    positionPost({
       type: "CENTER",
       payload: { border: "3px solid blue" },
     });
