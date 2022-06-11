@@ -1,4 +1,4 @@
-Draggable Component | <a href="https://chic-frangipane-186b02.netlify.app/">DEMO</a>
+Draggable Component | <a href="https://chic-frangipane-186b02.netlify.app/" target="_blank">DEMO</a>
 
 # Getting Started with Create React App
 
