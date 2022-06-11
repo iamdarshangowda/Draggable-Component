@@ -45,9 +45,9 @@ function Dialog() {
       y: dragDivDetails.top + e.clientY - dragStart.y,
     };
     if (
-      divPosition.y > 285 ||
-      divPosition.y < 55 ||
-      divPosition.x + 300 > document.documentElement.clientWidth ||
+      divPosition.y > 200 ||
+      divPosition.y < 52 ||
+      divPosition.x + 250 > document.documentElement.clientWidth ||
       divPosition.x < 0
     ) {
       setDragging(false);
@@ -62,19 +62,21 @@ function Dialog() {
   }
 
   return (
-    <div
-      className="drag-box"
-      style={styles}
-      ref={dragDivRef}
-      draggable="true"
-      onDragStart={handleDragStart}
-      onDrag={handleDragging}
-      onDragEnd={handleDragEnd}
-    >
-      <p className="float-text">
-        {nameOfPosition !== "" ? nameOfPosition : "Floating..."}
-      </p>
-      <p className="drag-text">Drag me around !</p>
+    <div className="drag-container">
+      <div
+        className="drag-box"
+        style={styles}
+        ref={dragDivRef}
+        draggable="true"
+        onDragStart={handleDragStart}
+        onDrag={handleDragging}
+        onDragEnd={handleDragEnd}
+      >
+        <p className="float-text">
+          {nameOfPosition !== "" ? nameOfPosition : "Floating..."}
+        </p>
+        <p className="drag-text">Drag me around !</p>
+      </div>
     </div>
   );
 }

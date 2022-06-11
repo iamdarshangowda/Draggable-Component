@@ -1,6 +1,11 @@
+.drag-container {
+  height: 400px;
+  background-color: gray;
+}
+
 .drag-box {
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border-radius: 8px;
   position: absolute;
   cursor: move;
@@ -20,7 +25,7 @@
 
 .drag-text {
   position: absolute;
-  top: 270px;
+  bottom: 0;
   right: 0;
   font-size: 18px;
 }

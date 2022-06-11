@@ -16,7 +16,7 @@ export default function SecondPage() {
   }
   return (
     <div className="page2">
-      <h3>Second Page</h3>
+      <h3>Page 2</h3>
       <div className="about-container">
         <h2 className="fname">Hi, I'm Darshan</h2>
         <p className="about-me">
